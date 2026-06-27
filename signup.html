@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Secure Vault</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:radial-gradient(circle at top,#16325d 0%,#08111f 45%,#03070d 100%);
+    overflow:hidden;
+}
+
+/* Background Glow */
+body::before{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+    background:#2563eb;
+    opacity:.15;
+    filter:blur(180px);
+    animation:pulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes pulse{
+    from{transform:scale(.9);}
+    to{transform:scale(1.2);}
+}
+
+.card{
+    position:relative;
+    width:430px;
+    padding:35px;
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:0 0 40px rgba(37,99,235,.35);
+    color:white;
+    z-index:2;
+}
+
+.logo{
+    font-size:60px;
+    text-align:center;
+    margin-bottom:10px;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#b6c5df;
+    margin-bottom:25px;
+    font-size:14px;
+    line-height:1.5;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.05);
+    color:white;
+    outline:none;
+    font-size:15px;
+}
+
+input::placeholder{
+    color:#bfc7d6;
+}
+
+input:focus{
+    border-color:#3b82f6;
+    box-shadow:0 0 10px rgba(59,130,246,.5);
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#3b82f6;
+    transform:translateY(-2px);
+}
+
+.strength{
+    margin-top:5px;
+    font-size:13px;
+    color:#7dd3fc;
+}
+
+.loading{
+    display:none;
+    text-align:center;
+    margin-top:25px;
+}
+
+.spinner{
+    width:42px;
+    height:42px;
+    margin:15px auto;
+    border:4px solid rgba(255,255,255,.2);
+    border-top:4px solid #3b82f6;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg);}
+}
+
+.status{
+    color:#9fd4ff;
+    font-size:14px;
+}
+
+.security{
+    margin-top:25px;
+    text-align:center;
+    color:#86efac;
+    font-size:13px;
+}
+
+.footer{
+    margin-top:18px;
+    text-align:center;
+    color:#b6c5df;
+    font-size:14px;
+}
+
+.footer a{
+    color:#60a5fa;
+    text-decoration:none;
+}
+
+.footer a:hover{
+    text-decoration:underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="logo">🔐</div>
+
+<h2>Create Secure Vault</h2>
+
+<p class="subtitle">
+Create your encrypted vault to protect your digital assets.
+</p>
+
+<form id="signupForm">
+
+<input type="text" placeholder="Vault Name" required>
+
+<input type="email" placeholder="Email Address" required>
+
+<input
+type="password"
+id="password"
+placeholder="Master Password"
+required
+>
+
+<div class="strength" id="strength">
+Password Strength: —
+</div>
+
+<input
+type="password"
+placeholder="Confirm Password"
+required
+>
+
+<button type="submit">
+Create Vault
+</button>
+
+</form>
+
+<div class="loading" id="loading">
+
+<div class="spinner"></div>
+
+<p class="status" id="status">
+Initializing...
+</p>
+
+</div>
+
+<div class="security">
+🟢 AES-256 Encryption • Secure Session Active
+</div>
+
+<div class="footer">
+Already have a vault?
+<a href="signin.html">Sign In</a>
+</div>
+
+</div>
+
+<script>
+
+const password=document.getElementById("password");
+const strength=document.getElementById("strength");
+
+password.addEventListener("input",()=>{
+
+let len=password.value.length;
+
+if(len<6){
+
+strength.innerHTML="Password Strength: Weak";
+strength.style.color="#ef4444";
+
+}
+else if(len<10){
+
+strength.innerHTML="Password Strength: Medium";
+strength.style.color="#facc15";
+
+}
+else{
+
+strength.innerHTML="Password Strength: Strong";
+strength.style.color="#22c55e";
+
+}
+
+});
+
+const form=document.getElementById("signupForm");
+const loading=document.getElementById("loading");
+const status=document.getElementById("status");
+
+const steps=[
+"Connecting to Secure Gateway...",
+"Establishing Encrypted Tunnel...",
+"Generating Encryption Keys...",
+"Creating Secure Vault...",
+"Encrypting Vault Metadata...",
+"Finalizing Security Configuration..."
+];
+
+form.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+form.style.display="none";
+
+loading.style.display="block";
+
+let i=0;
+
+status.innerHTML=steps[0];
+
+const process=setInterval(()=>{
+
+i++;
+
+if(i<steps.length){
+
+status.innerHTML=steps[i];
+
+}else{
+
+clearInterval(process);
+
+loading.innerHTML=`
+<h2 style="color:#22c55e;">
+✔ Vault Created Successfully
+</h2>
+
+<br>
+
+<p style="color:#d1d5db;">
+Your encrypted vault has been initialized.
+</p>
+
+<p style="margin-top:15px;color:#60a5fa;">
+Redirecting to Sign In...
+</p>
+`;
+
+setTimeout(()=>{
+
+window.location.href="login.html";
+
+},2500);
+
+}
+
+},1200);
+
+});
+
+</script>
+
+</body>
+</html>

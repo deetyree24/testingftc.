@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Digital Vault</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,Arial,sans-serif;
+}
+
+body{
+
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+radial-gradient(circle at top,#16325d 0%,#08111f 45%,#03070d 100%);
+
+overflow:hidden;
+
+}
+
+/* Background glow */
+
+body::before{
+
+content:"";
+
+position:absolute;
+
+width:600px;
+height:600px;
+
+background:#1d4ed8;
+
+filter:blur(180px);
+
+opacity:.18;
+
+animation:pulse 6s infinite alternate;
+
+}
+
+@keyframes pulse{
+
+from{transform:scale(.8);}
+to{transform:scale(1.2);}
+
+}
+
+.card{
+
+position:relative;
+
+width:420px;
+
+padding:45px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(20px);
+
+border:1px solid rgba(255,255,255,.15);
+
+border-radius:22px;
+
+text-align:center;
+
+box-shadow:0 0 40px rgba(0,100,255,.25);
+
+color:white;
+
+z-index:1;
+
+}
+
+.vault{
+
+font-size:70px;
+
+margin-bottom:20px;
+
+filter:drop-shadow(0 0 15px #3b82f6);
+
+}
+
+h1{
+
+font-size:34px;
+
+margin-bottom:10px;
+
+}
+
+.subtitle{
+
+color:#b7c6e0;
+
+line-height:1.6;
+
+margin-bottom:35px;
+
+}
+
+.btn{
+
+display:block;
+
+text-decoration:none;
+
+padding:16px;
+
+margin:15px 0;
+
+border-radius:12px;
+
+font-size:17px;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.create{
+
+background:#2563eb;
+
+color:white;
+
+box-shadow:0 0 20px rgba(37,99,235,.5);
+
+}
+
+.create:hover{
+
+transform:translateY(-3px);
+
+background:#3b82f6;
+
+}
+
+.login{
+
+border:1px solid #3b82f6;
+
+color:#8ec5ff;
+
+background:rgba(255,255,255,.05);
+
+}
+
+.login:hover{
+
+background:rgba(59,130,246,.18);
+
+}
+
+.security{
+
+margin-top:30px;
+
+font-size:13px;
+
+color:#89f7b2;
+
+letter-spacing:1px;
+
+}
+
+.version{
+
+margin-top:10px;
+
+font-size:11px;
+
+opacity:.5;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="vault">
+🔐
+</div>
+
+<h1>Digital Vault</h1>
+
+<p class="subtitle">
+Protect your files with military-grade encryption.<br>
+Access your secure vault from anywhere.
+</p>
+
+<a class="btn create" href="signup.html">
+Create Secure Vault
+</a>
+
+<a class="btn login" href="login.html">
+Unlock Existing Vault
+</a>
+
+<div class="security">
+🟢 SECURE • AES-256 ENCRYPTION
+</div>
+
+<div class="version">
+Vault OS v2.6
+</div>
+
+</div>
+
+</body>
+</html>
