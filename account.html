@@ -1,0 +1,215 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Account Details</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#07111f;
+    color:white;
+    display:flex;
+}
+
+.sidebar{
+    width:240px;
+    height:100vh;
+    background:#0d1829;
+    padding:25px;
+    position:fixed;
+}
+
+.logo{
+    font-size:24px;
+    color:#60a5fa;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:12px;
+    margin:8px 0;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.sidebar a:hover{
+    background:#2563eb;
+}
+
+.main{
+    margin-left:240px;
+    width:100%;
+    padding:35px;
+}
+
+.card{
+    background:#111c33;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:20px;
+    box-shadow:0 0 20px rgba(0,0,0,.3);
+}
+
+.title{
+    font-size:30px;
+    margin-bottom:20px;
+}
+
+.info{
+    display:flex;
+    justify-content:space-between;
+    padding:15px 0;
+    border-bottom:1px solid #22314d;
+}
+
+.label{
+    color:#9ca3af;
+}
+
+.value{
+    color:#4ade80;
+    font-weight:bold;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.warning{
+    margin-top:20px;
+    padding:15px;
+    background:#7c2d12;
+    border-radius:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">🔐 Digital Vault</div>
+
+<a href="dashboard.html">🏠 Dashboard</a>
+<a href="vault.html">📁 My Vault</a>
+<a href="account.html">💰 Secure Account Details</a>
+<a href="settings.html">⚙ Settings</a>
+<a href="index.html">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+<h1 class="title">Secure Account Details</h1>
+
+<div class="card">
+
+<div class="info">
+<span class="label">Customer Name</span>
+<span class="value" id="name">Loading...</span>
+</div>
+
+<div class="info">
+<span class="label">Bank Name</span>
+<span class="value">ABC National Bank</span>
+</div>
+
+<div class="info">
+<span class="label">Account Number</span>
+<span class="value" id="account">XXXXXXXX1234</span>
+</div>
+
+<div class="info">
+<span class="label">IFSC Code</span>
+<span class="value">ABCD0001234</span>
+</div>
+
+<div class="info">
+<span class="label">Branch</span>
+<span class="value">New Delhi Main Branch</span>
+</div>
+
+<div class="info">
+<span class="label">UPI ID</span>
+<span class="value">customer@abcbank</span>
+</div>
+
+<div class="info">
+<span class="label">Account Type</span>
+<span class="value">Savings</span>
+</div>
+
+<div class="info">
+<span class="label">Status</span>
+<span class="value">Verified ✓</span>
+</div>
+
+<button onclick="toggleAccount()">
+Show / Hide Account Number
+</button>
+
+<div class="warning">
+⚠ This page displays demo bank account information for educational purposes only.
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const customerName =
+localStorage.getItem("customerName") || "Customer";
+
+document.getElementById("name").innerHTML = customerName;
+
+let visible = false;
+
+function toggleAccount(){
+
+const account =
+document.getElementById("account");
+
+if(visible){
+
+account.innerHTML="XXXXXXXX1234";
+
+}else{
+
+account.innerHTML="12345678901234";
+
+}
+
+visible=!visible;
+
+}
+
+</script>
+
+</body>
+</html>
+```
